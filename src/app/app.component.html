@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <h2>Formulaire d'inscription</h2>
+
+  <form #inscriptionForm="ngForm" (ngSubmit)="onSubmit()">
+    {{ inscriptionForm.value | json }}
+    <div class="col-md-4 form-group">
+      <label for="validationCustom01" class="form-label">Name</label>
+      <input #inputNom="ngModel" 
+        required
+        [class.is-invalid]="inputNom.invalid && inputNom.touched"
+        type="text" class="form-control" name="nom" [(ngModel)]="etudiant.nom"
+      />
+      <small class="text-danger" *ngIf="inputNom.invalid && inputNom.touched">
+        le Nom est Obligatoire
+      </small>
+    </div>
+    <div class="col-md-4 form-group">
+      <label for="" class="form-label">email</label>
+      <div class="input-group has-validation">
+        <input #inputNon
+          type="email"
+          class="form-control"
+          id="validationCustomUsername"
+          aria-describedby="inputGroupPrepend"
+          required
+          name="email"
+          ngModel
+        />
+      </div>
+
+    </div>
+    <div class="col-md-4 form-group">
+      <label for="" class="form-label">Spécialité</label>
+      <select class="custom-select" name="specialite" [(ngModel)]="etudiant.specialites">
+        <option value="" selected>Chosir un spécialité</option>
+        <option *ngFor="let spec of specialites">{{ spec }}</option>
+      </select>
+    </div>
+
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit" [disabled]="inscriptionForm.form.invalid">Valider</button>
+    </div>
+  </form>
+</div>
